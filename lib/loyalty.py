@@ -15,5 +15,8 @@ class Loyalty:
     def check_status(self):
         check_status = Check_Status(self.company, self.save_score, 
                                     self.score, self.coefficient)
-        self.score = check_status.processe()
+        status = check_status.processe()
+        self.score = check_status.score
+        del check_status # clear memory
 
+        return status

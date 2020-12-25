@@ -9,24 +9,25 @@ class Check_Status:
     def processe(self):
         if self.operative():
             if self.not_liquidated():
-                return self.score
+                return True
             else:
                 self.score -= self.save_score(self.score, 'liquidated')
-                return self.score
+                return False
         else:
             self.score -= self.save_score(self.score, 'inoperative')
-            return self.score
+            return False
 
     def operative(self):
         # Проверяем, является ли компание действующей
-        invalid = self.company[$] # [AL]
+        invalid = self.company[0] # [AL]
         if invalid == 'True':
             return False
 
         return True
 
     def not_liquidated(self):
-        liquidated = self.company[$] # [AM]
+        # Проверяем, назодится ли компания на стадии ликвидации
+        liquidated = self.company[1] # [AM]
         if liquidated == 'True':
             return False
 
