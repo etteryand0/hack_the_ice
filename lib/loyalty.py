@@ -1,3 +1,5 @@
+from lib.loyalty_modules import Check_Status
+
 class Loyalty:
     def __init__(self, company):
         self.company = company # list
@@ -11,27 +13,7 @@ class Loyalty:
         return score * self.coefficient[reason]
 
     def check_status(self):
-        if self.operative():
-            if self.not_liquidated():
-                return True
-            else:
-                self.score -= self.save_score(self.score, 'liquidated')
-                return False
-        else:
-            self.score -= self.save_score(self.score, 'inoperative')
-            return False
+        check_status = Check_Status(self.company, self.save_score, 
+                                    self.score, self.coefficient)
+        self.score = check_status.processe()
 
-    def operative(self):
-        # Проверяем, является ли компание действующей
-        invalid = self.company[$] # [AL]
-        if invalid == 'True':
-            return False
-
-        return True
-
-    def not_liquidated(self):
-        liquidated = self.company[$] # [AM]
-        if liquidated == 'True':
-            return False
-
-        return True
