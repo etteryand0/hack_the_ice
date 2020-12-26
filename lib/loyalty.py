@@ -1,13 +1,15 @@
 from lib.loyalty_modules import Check_Status
 from lib.loyalty_modules import Proceedings
 from lib.loyalty_modules import License
+from lib.loyalty_modules import Special_Registers
 
 
 class Loyalty:
     def __init__(self, company):
         # company = ['B-company_name(str)', 'D-ИНН(int)', 'AL-недействующая(bool)', 'AM-на стадии ликвидации(bool)', # 0-3
         #            'BV-номер исп права(str)', 'CE-должник(str)', 'BY-сумма долга(list int)', 'AR-лицензия(str)' # 4-7
-        #           ]
+        #            'HK-ос.реестры, неуплата', 'HL-нет налог. отч.', 'HH-масс. учр.', 'HG-масс. рук.', 'HE-бан учр.', # 8-12
+        #            ''] 
         self.company = company  # list
         self.score = 10000
         self.coefficient = {
@@ -55,3 +57,14 @@ class Loyalty:
         del check_license
 
         return license_
+
+    def check_special_registers(self):
+        # Проверяем компанию на нахождение в специальных реестрах НФС
+        # Колонки: HK, HL, HH, HG, HE
+        check_special_registers = Special_Registers(self.company, self.calculate_score,
+                                                    self.score)
+        special_registers = check_special_registers.processe()
+        self.score = check_special_registers.score
+        del check_special_registers
+
+        return special_registers
