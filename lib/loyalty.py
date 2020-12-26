@@ -12,7 +12,7 @@ class Loyalty:
         self.coefficient = {
             'inoperative': 1,
             'liquidated': 1,
-            'debt': 1.5,
+            'debt': 0.005,
             'no_debt': 5
         }  # коэффиценты для вычитания\прибавления баллов
 
