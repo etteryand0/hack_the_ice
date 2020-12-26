@@ -28,7 +28,17 @@ class Special_Registers:
         return False
 
     def taxes_history(self):
-        pass
+        # HL - нет истории налогов
+        no_history = self.company[9].strip()
+        if bool(no_history):
+            punishment = self.calculate_score(1000, 'no_taxes_history')
+            self.score -= punishment
+            return False
+
+        bonus = self.calculate_score(1000, 'taxes_history')
+        self.score += bonus
+
+        return True
 
     def massive_founder(self):
         # HH - массовый учредитель
