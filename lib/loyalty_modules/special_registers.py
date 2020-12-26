@@ -21,7 +21,14 @@ class Special_Registers:
         pass
 
     def massive_founder(self):
-        pass
+        # HH - массовый учредитель
+        massive = self.company[10].strip()
+        if bool(massive):
+            punishment = self.calculate_score(1000, 'massive_founder')
+            self.score -= punishment
+            return True
+
+        return False
 
     def massive_leader(self):
         pass
