@@ -17,7 +17,8 @@ class Loyalty:
             'liquidated': 1,
             'debt': 0.005,
             'no_debt': 5,
-            'have_license': 10
+            'have_license': 10,
+            'banned_founder':5
         }  # коэффиценты для вычитания\прибавления баллов
 
     def calculate_score(self, score, reason):

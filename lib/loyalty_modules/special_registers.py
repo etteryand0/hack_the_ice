@@ -6,7 +6,13 @@ class Special_Registers:
         self.calculate_score = calculate_score
 
     def processe(self):
-        pass
+        self.banned_founder()
+        self.massive_founder()
+        self.massive_leader()
+        self.taxes_debt()
+        self.taxes_history()
+
+        return True
 
     def taxes_debt(self):
         pass
@@ -21,4 +27,11 @@ class Special_Registers:
         pass
 
     def banned_founder(self):
-        pass
+        # HE - бан учредителя
+        banned = self.company[12].strip()
+        if bool(banned):
+            punishment = self.calculate_score(1000, 'banned_founder')
+            self.score -= punishment
+            return True
+        
+        return False
