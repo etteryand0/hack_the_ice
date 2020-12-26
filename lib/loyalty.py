@@ -27,7 +27,7 @@ class Loyalty:
         # (недейстующая, находится на стадии разработки)
         # Колонки: AL, AM
         check_status = Check_Status(self.company, self.calculate_score,
-                                    self.score, self.coefficient)
+                                    self.score)
         status = check_status.processe()
         self.score = check_status.score
         del check_status  # clear memory
@@ -38,7 +38,7 @@ class Loyalty:
         # Проверяем компанию на испольнительные производства
         # Колонки: BV, B, CE, BY
         check_proceedings = Proceedings(self.company, self.calculate_score,
-                                        self.score, self.coefficient)
+                                        self.score)
         proceedings = check_proceedings.processe()
         self.score = check_proceedings.score
         del check_proceedings

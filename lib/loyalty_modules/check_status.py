@@ -1,9 +1,8 @@
 class Check_Status:
     def __init__(self, company, calculate_score,
-                 score, coefficient):
+                 score):
         self.company = company
         self.score = score
-        self.coefficient = coefficient
         self.calculate_score = calculate_score
 
     def processe(self):
