@@ -31,7 +31,14 @@ class Special_Registers:
         return False
 
     def massive_leader(self):
-        pass
+        # HG - массовый руководитель
+        massive = self.company[11].strip()
+        if bool(massive):
+            punishment = self.calculate_score(1000, 'massive_leader')
+            self.score -= punishment
+            return True
+
+        return False
 
     def banned_founder(self):
         # HE - бан учредителя
