@@ -7,21 +7,24 @@ class Proceedings:
         self.calculate_score = calculate_score
 
     def processe(self):
-        proceedings = self.company[4]  # BV
+        proceedings = self.company[4]  # BV - номер исп права(str)
         if bool(proceedings):
-            self.score -= self.proceedings_value()
-            return True
-        else:
-            return False
+            punishment = self.proceedings_value()
+            if punishment:
+                self.score -= self.proceedings_value()
+                return True
+
+        no_debt = self.calculate_score(100, 'no_debt')
+        self.score += no_debt
+        return False
 
     def proceedings_value(self):
-        proceedings_value = self.company[6]  # BY
-        promiser = self.company[5]  # CE
-        company_name = self.company[0]  # B
+        proceedings_value = self.company[6].strip()  # BY-сумма долга(list int)
+        promiser = self.company[5]  # CE - должник(str)
+        company_name = self.company[0]  # B-company_name(str)
 
         if company_name != promiser:
-            punishment = 0
-            return punishment
+            return False
 
         values_obj = map(int, proceedings_value.split(';'))
         debt = sum(list(values_obj))

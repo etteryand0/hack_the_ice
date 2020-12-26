@@ -12,7 +12,8 @@ class Loyalty:
         self.coefficient = {
             'inoperative': 1,
             'liquidated': 1,
-            'debt': 1.5
+            'debt': 1.5,
+            'no_debt': 5
         }  # коэффиценты для вычитания\прибавления баллов
 
     def calculate_score(self, score, reason):
