@@ -1,11 +1,12 @@
 from lib.loyalty_modules import Check_Status
 from lib.loyalty_modules import Proceedings
+from lib.loyalty_modules import License
 
 
 class Loyalty:
     def __init__(self, company):
-        # company = ['B-company_name(str)', 'D-ИНН(int)', 'AL-недействующая(bool)', 'AM-на стадии ликвидации(bool)',
-        #            'BV-номер исп права(str)', 'CE-должник(str)', 'BY-сумма долга(list int)'
+        # company = ['B-company_name(str)', 'D-ИНН(int)', 'AL-недействующая(bool)', 'AM-на стадии ликвидации(bool)', # 0-3
+        #            'BV-номер исп права(str)', 'CE-должник(str)', 'BY-сумма долга(list int)', 'AR-лицензия(str)' # 4-7
         #           ]
         self.company = company  # list
         self.score = 10000
@@ -13,7 +14,8 @@ class Loyalty:
             'inoperative': 1,
             'liquidated': 1,
             'debt': 0.005,
-            'no_debt': 5
+            'no_debt': 5,
+            'have_license': 10
         }  # коэффиценты для вычитания\прибавления баллов
 
     def calculate_score(self, score, reason):
@@ -42,3 +44,14 @@ class Loyalty:
         del check_proceedings
 
         return proceedings
+
+    def check_license(self):
+        # Проверяем компанию на наличие лицензии
+        # Колонки: AR
+        check_license = License(self.company, self.calculate_score,
+                                self.score)
+        license_ = check_license.processe()
+        self.score = check_license.score
+        del check_license
+
+        return license_
