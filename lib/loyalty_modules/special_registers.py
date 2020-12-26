@@ -15,7 +15,17 @@ class Special_Registers:
         return True
 
     def taxes_debt(self):
-        pass
+        # HK - неуплата налогов
+        nonpayment = self.company[8].strip()
+        if bool(nonpayment):
+            punishment = self.calculate_score(1000, 'taxes_debt')
+            self.score -= punishment
+            return True
+
+        bonus = self.calculate_score(1000, 'no_taxes_debt')
+        self.score += bonus
+
+        return False
 
     def taxes_history(self):
         pass
@@ -28,6 +38,9 @@ class Special_Registers:
             self.score -= punishment
             return True
 
+        bonus = self.calculate_score(1000, 'not_massive')
+        self.score += bonus
+
         return False
 
     def massive_leader(self):
@@ -37,6 +50,9 @@ class Special_Registers:
             punishment = self.calculate_score(1000, 'massive_leader')
             self.score -= punishment
             return True
+
+        bonus = self.calculate_score(1000, 'not_massive')
+        self.score += bonus
 
         return False
 
