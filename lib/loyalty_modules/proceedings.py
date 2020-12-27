@@ -1,5 +1,5 @@
 class Proceedings:
-    def __init__(self, company, 
+    def __init__(self, company,
                  calculate_score, score):
         self.company = company
         self.score = score
@@ -18,14 +18,23 @@ class Proceedings:
         return False
 
     def proceedings_value(self):
-        proceedings_value = self.company[6].strip()  # BY-сумма долга(list int)
+        proceedings_value = self.company[6]  # BY-сумма долга(list int)
         promiser = self.company[5]  # CE - должник(str)
         company_name = self.company[0]  # B-company_name(str)
 
-        if company_name != promiser:
+        # if company_name != promiser:
+        #   return False
+        # Данные АЭБ данные сломанные, поэтому делаем так
+        if not bool(promiser):
             return False
 
-        values_obj = map(int, proceedings_value.split(';'))
+        values_list = str(proceedings_value).split(';')
+        for item in values_list:
+            item = item.replace(',', '.')
+
+        values_obj = map(lambda item: item.replace(',', '.'), values_list)
+        values_obj = map(float, list(values_obj))
+
         debt = sum(list(values_obj))
 
         punishment = self.calculate_score(debt, 'debt')

@@ -19,7 +19,7 @@ class Check_Status:
     def operative(self):
         # Проверяем, является ли компание действующей
         invalid = self.company[2]  # [AL]
-        if invalid == 'True':
+        if bool(invalid):
             return False
 
         return True
@@ -27,7 +27,7 @@ class Check_Status:
     def not_liquidated(self):
         # Проверяем, назодится ли компания на стадии ликвидации
         liquidated = self.company[3]  # [AM]
-        if liquidated == 'True':
+        if bool(liquidated):
             return False
 
         return True

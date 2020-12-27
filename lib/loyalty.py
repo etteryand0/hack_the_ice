@@ -9,7 +9,7 @@ class Loyalty:
         # company = ['B-company_name(str)', 'D-ИНН(int)', 'AL-недействующая(bool)', 'AM-на стадии ликвидации(bool)', # 0-3
         #            'BV-номер исп права(str)', 'CE-должник(str)', 'BY-сумма долга(list int)', 'AR-лицензия(str)' # 4-7
         #            'HK-ос.реестры, неуплата', 'HL-нет налог. отч.', 'HH-масс. учр.', 'HG-масс. рук.', 'HE-бан учр.', # 8-12
-        #            ''] 
+        #            '']
         self.company = company  # list
         self.score = 10000
         self.coefficient = {
@@ -19,7 +19,7 @@ class Loyalty:
             'no_debt': 5,
             'have_license': 10,
             'banned_founder': 5,
-            'massive_founder': 0.1, 'not_massive':0.3,
+            'massive_founder': 0.15, 'not_massive': 0.3,
             'massive_leader': 0.3,
             'taxes_debt': 0.5, 'no_taxes_debt': 0.3,
             'no_taxes_history': 0.5, 'taxes_history': 0.1
