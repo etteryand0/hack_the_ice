@@ -1,5 +1,5 @@
 class License:
-    def __init__(self, company, 
+    def __init__(self, company,
                  calculate_score, score):
         self.company = company
         self.score = score
@@ -10,6 +10,7 @@ class License:
             return False
 
         self.score += self.calculate_score(100, 'have_license')
+
         return True
 
     def have_license(self):
